@@ -18,13 +18,19 @@
   },
   "homepage": "https://github.com/lamnguyencse17/Monal#readme",
   "dependencies": {
+    "babel-plugin-module-resolver": "^4.0.0",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
+    "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
+    "mongodb": "^3.5.6",
     "mongoose": "^5.9.9",
+    "multer": "^1.4.2",
+    "multer-gridfs-storage": "^4.0.3",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -50,7 +56,16 @@
       "@babel/preset-react"
     ],
     "plugins": [
-      "@babel/plugin-proposal-class-properties"
+      "@babel/plugin-proposal-class-properties",
+      [
+        "module-resolver",
+        {
+          "alias": {
+            "@middlewares": "./src/server/middlewares",
+            "@helpers": "./src/server/helpers"
+          }
+        }
+      ]
     ]
   }
 }
