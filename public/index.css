@@ -1,0 +1,105 @@
+body {
+  height: 90vh;
+  margin: 0;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  font-family: sans-serif;
+  background-repeat: no-repeat;
+  background: linear-gradient(
+    0deg,
+    rgba(43, 50, 79, 1) 0%,
+    rgba(234, 152, 164, 1) 100%
+  );
+}
+
+h1,
+h2,
+h3 {
+  color: #f0582a;
+}
+
+button {
+  margin: 5px;
+}
+
+ul.unstyled {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.brand {
+  color: black;
+  font-family: Montserrat;
+  position: fixed;
+  top: 1vh;
+  left: 1vh;
+}
+nav ul {
+  height: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #f4f4f4;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ul-left {
+  justify-content: flex-start;
+}
+
+nav li a {
+  display: block;
+  color: #ea98a4;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  color: #2b324f;
+}
+
+nav {
+  position: fixed;
+  height: 5vh;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+footer {
+  position: fixed;
+  top: 95vh;
+  height: 5vh;
+  background: #cb6d2d;
+  width: 100vw;
+  text-align: center;
+}
+#myVideo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+video {
+  object-fit: fill;
+}
+button {
+  border-radius: 25px;
+  background-color: #cb6d2d;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: 10vw;
+  height: 5vh;
+}
+
+button:hover {
+  background-color: white;
+  color: #cb6d2d;
+}

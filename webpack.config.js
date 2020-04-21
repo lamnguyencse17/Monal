@@ -1,10 +1,17 @@
 const path = require("path");
 
 const config = {
-  entry: "./src/renderers/dom.js",
+  entry: "./src/components/Index.js",
   output: {
     path: path.resolve(__dirname, "public"),
+    publicPath: "/",
     filename: "bundle.js",
+  },
+  devServer: {
+    contentBase: "./",
+    publicPath: "/dist/",
+    historyApiFallback: true,
+    hot: true,
   },
   module: {
     rules: [
