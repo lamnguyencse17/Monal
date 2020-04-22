@@ -1,7 +1,8 @@
 import React from "react";
 import { Spring } from "react-spring/renderprops.cjs";
 
-export default function MainPage() {
+export default function MainPage(props) {
+  const { login } = props.auth;
   return (
     <>
       <Spring
@@ -16,7 +17,7 @@ export default function MainPage() {
               <br />
               ANYWHERE. ANYTIME.
               <br />
-              <button>START NOW</button>
+              <button onClick={login}>START NOW</button>
             </div>
           </div>
         )}

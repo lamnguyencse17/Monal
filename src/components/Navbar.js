@@ -3,6 +3,7 @@ import { Route, Switch, Link } from "react-router-dom";
 
 export default class Navbar extends Component {
   render() {
+    const { isAuthenticated, login } = this.props.auth;
     return (
       <nav>
         <ul>
@@ -13,10 +14,15 @@ export default class Navbar extends Component {
             <Link to="/">About</Link>
           </li>
           <li>
-            <Link to="/">Register</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
+            {isAuthenticated() ? (
+              <Link to="#" onClick={logout}>
+                Logout
+              </Link>
+            ) : (
+              <Link to="#" onClick={login}>
+                Start
+              </Link>
+            )}
           </li>
         </ul>
       </nav>
