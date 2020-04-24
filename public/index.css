@@ -32,7 +32,7 @@ ul.unstyled {
   font-family: Montserrat;
   position: fixed;
   top: 1.3vh;
-  left: 1vh;
+  padding-left: 1.2rem;
 }
 nav ul {
   height: 100%;
@@ -62,8 +62,9 @@ nav li a:hover {
 }
 
 nav {
+  font-family: sans-serif;
   position: fixed;
-  height: 5vh;
+  height: 5%;
   top: 0;
   left: 0;
   right: 0;
@@ -102,4 +103,50 @@ button {
 button:hover {
   background-color: white;
   color: #cb6d2d;
+}
+
+.sidenav {
+  font-family: Montserrat;
+  height: 80%;
+  width: 15vw;
+  position: absolute;
+  left: 0;
+  background-color: #383838;
+  padding-top: 2vh;
+  top: 5vh;
+}
+
+.sidenav a {
+  font-family: Montserrat;
+  padding: 0.5rem 0.6rem 0.5rem 1.2rem;
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #ea98a4;
+}
+
+.playbar {
+  display: flex;
+  font-family: Montserrat;
+  height: 15%;
+  width: 100%;
+  position: absolute;
+  background-color: black;
+  align-items: center;
+  justify-content: center;
+  top: 85%;
+}
+
+.playbar p {
+  color: #ea98a4;
+  text-align: center;
+}
+
+.playbar button {
+  color: white;
+  background-color: #ea98a4;
 }

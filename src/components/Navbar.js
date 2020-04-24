@@ -3,7 +3,7 @@ import { Route, Switch, Link } from "react-router-dom";
 
 export default class Navbar extends Component {
   render() {
-    const { isAuthenticated, login } = this.props.auth;
+    const { isAuthenticated, login, logout } = this.props.auth;
     return (
       <nav>
         <ul>

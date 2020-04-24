@@ -5,6 +5,9 @@ export default function MainPage(props) {
   const { login } = props.auth;
   return (
     <>
+      <video autoPlay loop id="myVideo">
+        <source src="../../public/background.mp4" type="video/mp4" />
+      </video>
       <Spring
         from={{ opacity: 0 }}
         to={{ opacity: 1 }}
@@ -22,6 +25,9 @@ export default function MainPage(props) {
           </div>
         )}
       </Spring>
+      <footer>
+        Monal <br /> Copyrighted 2020
+      </footer>
     </>
   );
 }

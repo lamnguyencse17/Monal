@@ -4,6 +4,8 @@ import { Switch, Route } from "react-router-dom";
 import Login from "./Login";
 import MainPage from "./MainPage";
 import Auth from "./Auth/Auth";
+import Callback from "./Callback";
+import Player from "./Player/Player";
 
 class App extends Component {
   constructor(props) {
@@ -24,12 +26,13 @@ class App extends Component {
             path="/callback"
             render={(props) => <Callback auth={this.auth} {...props} />}
           />
+          <Route
+            path="/player"
+            render={(props) => <Player auth={this.auth} {...props} />}
+          />
         </Switch>
         <Navbar auth={this.auth} />
         <div className="brand">Monal</div>
-        <footer>
-          Monal <br /> Copyrighted 2020
-        </footer>
       </>
     );
   }

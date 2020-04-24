@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
     "Content-Disposition",
     "attachment;filename=" + data.s.filter.filename
   );
-  res.setHeader("Content-Type", "audio/ogg");
+  res.setHeader("Content-Type", "audio/mp3");
   data.on("data", async (chunk) => {
     res.write(chunk);
   });
