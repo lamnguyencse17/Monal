@@ -17,7 +17,7 @@ module.exports = {
   },
   plugins: ["react"],
   rules: {
-    "react/prop-types": ["off"],
+    "react/prop-types": ["on"],
     "react/display-name": ["off"],
     "react/no-unescaped-entities": ["off"],
     "linebreak-style": ["error", "unix"],

@@ -14,8 +14,6 @@ export default class AudioInterface {
     }
   };
   getProgress = () => {
-    // console.log(this.audio.seekable);
-    // console.log(this.audio.seekable.end(0));
     return this.audio.currentTime / this.audio.duration;
   };
   setCurrentTime = (progress) => {

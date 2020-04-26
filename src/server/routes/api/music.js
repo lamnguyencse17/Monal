@@ -10,10 +10,9 @@ router.post("/", upload.single("file"), async (req, res) => {
 router.get("/", (req, res) => {
   let file = req.query.file;
   let data = stream(file);
-  console.log(req.headers);
   res.writeHead(200, {
     "Content-Disposition": "attachment;filename=" + data.s.filter.filename,
-    "Accept-Ranges": "bytes ",
+    "Accept-Ranges": "bytes=0-",
     "Cache-Control": "no-cache private",
     "Content-Type": "audio/mp3",
   });
