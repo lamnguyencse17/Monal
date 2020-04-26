@@ -7,19 +7,22 @@ import upload from "@middlewares/upload";
 router.post("/", upload.single("file"), async (req, res) => {
   res.send({ message: "done" });
 });
-
 router.get("/", (req, res) => {
   let file = req.query.file;
   let data = stream(file);
-  res.setHeader(
-    "Content-Disposition",
-    "attachment;filename=" + data.s.filter.filename
-  );
-  res.setHeader("Content-Type", "audio/mp3");
+  console.log(req.headers);
+  res.writeHead(200, {
+    "Content-Disposition": "attachment;filename=" + data.s.filter.filename,
+    "Accept-Ranges": "bytes ",
+    "Cache-Control": "no-cache private",
+    "Content-Type": "audio/mp3",
+  });
   data.on("data", async (chunk) => {
     res.write(chunk);
   });
-  data.on("end", () => res.end());
+  data.on("end", () => {
+    res.end();
+  });
 });
 
 module.exports = router;

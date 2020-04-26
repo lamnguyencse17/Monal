@@ -130,14 +130,12 @@ button:hover {
 }
 
 .playbar {
-  display: flex;
   font-family: Montserrat;
   height: 15%;
   width: 100%;
   position: absolute;
   background-color: black;
   align-items: center;
-  justify-content: center;
   top: 85%;
 }
 
@@ -146,7 +144,12 @@ button:hover {
   text-align: center;
 }
 
-.playbar button {
-  color: white;
-  background-color: #ea98a4;
+.control-row {
+  display: flex;
+  justify-content: center;
+}
+
+.progress-row {
+  width: 30%;
+  margin: auto;
 }
