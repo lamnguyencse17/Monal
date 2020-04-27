@@ -2,25 +2,30 @@ import React, { Component } from "react";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
 import ProgressBar from "./ProgressBar";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { togglePlay } from "../actions/music";
 
-export default class AudioController extends Component {
+class AudioController extends Component {
   constructor(props) {
     super(props);
     this.state = {
       progress: 0,
     };
   }
-  handlePlay = () => {
-    this.props.togglePlayIcon();
-    this.props.togglePlayAudio();
-    setInterval(() => {
-      this.setProgress(this.props.getProgress() * 100);
-    }, 1000);
-  };
   setProgress = (progress) => {
     this.setState({ progress });
   };
+  handlePlay = () => {
+    this.props.togglePlay(this.props.audioObject);
+    setInterval(() => {
+      let progress = this.props.audioObject.getProgress() * 100;
+      this.setProgress(progress);
+    }, 1000);
+  };
   render() {
+    const { audioObject } = this.props;
     return (
       <>
         <div className="control-row">
@@ -45,7 +50,7 @@ export default class AudioController extends Component {
         <div className="progress-row">
           <ProgressBar
             progress={this.state.progress}
-            setCurrentTime={this.props.setCurrentTime}
+            audioObject={audioObject} // passed from parent
             setProgress={this.setProgress}
           />
         </div>
@@ -53,3 +58,18 @@ export default class AudioController extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    audio: state.music.audio,
+    play: state.music.play,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ togglePlay }, dispatch);
+}
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AudioController)
+);

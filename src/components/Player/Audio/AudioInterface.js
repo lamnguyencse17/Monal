@@ -6,7 +6,7 @@ export default class AudioInterface {
   getSource = () => {
     return this.audio;
   };
-  togglePlayAudio = () => {
+  togglePlay = () => {
     if (this.audio.paused && !this.audio.ended) {
       this.audio.play();
     } else {

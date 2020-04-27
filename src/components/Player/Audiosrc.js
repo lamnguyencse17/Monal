@@ -7,11 +7,7 @@ export default class Audiosrc extends Component {
         {this.props.audio === null ? (
           <></>
         ) : (
-          <audio
-            src={this.props.getSource()}
-            type="audio/mpeg"
-            preload="none"
-          />
+          <audio src={this.props.audio} type="audio/mpeg" preload="none" />
         )}
       </>
     );

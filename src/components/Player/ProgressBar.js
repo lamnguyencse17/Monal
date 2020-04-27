@@ -5,14 +5,15 @@ import Slider from "@material-ui/core/Slider";
 
 export default class ProgressBar extends Component {
   render() {
+    const { progress, audioObject } = this.props;
     return (
       <>
         <PrettoSlider
           valueLabelDisplay="off"
           aria-label="pretto slider"
-          value={this.props.progress}
+          value={progress}
           onChange={(event, value) => {
-            this.props.setCurrentTime(value);
+            audioObject.setCurrentTime(value);
           }}
           step={0.1}
         />
