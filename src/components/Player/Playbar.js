@@ -5,7 +5,7 @@ import AudioInterface from "./Audio/AudioInterface";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { togglePlay, setCurrentAudio } from "../actions/music";
+import { togglePlay, setCurrentAudio, pushToQueue } from "../actions/music";
 
 class Playbar extends Component {
   constructor(props) {
@@ -13,34 +13,30 @@ class Playbar extends Component {
     this.props.setCurrentAudio(
       "http://localhost:3000/api/music?file=8972ecadTest.mp3"
     );
-    this.state = {
-      audioObject: new AudioInterface(
-        "http://localhost:3000/api/music?file=8972ecadTest.mp3",
-        this.props.togglePlay
-      ),
-    };
+    ["d3ea649eOneWay.mp3", "d3839625HongKong1.mp3"].map((song) =>
+      this.props.pushToQueue("http://localhost:3000/api/music?file=" + song)
+    );
   }
-
   render() {
     return (
       <div className="playbar">
-        <Audiosrc audio={this.props.audio} />
-        <AudioController audioObject={this.state.audioObject} />
+        <AudioController />
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    audio: state.music.audio,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     audio: state.music.audio,
+//   };
+// }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ togglePlay, setCurrentAudio }, dispatch);
+  return bindActionCreators(
+    { togglePlay, setCurrentAudio, pushToQueue },
+    dispatch
+  );
 }
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Playbar)
-);
+export default withRouter(connect(null, mapDispatchToProps)(Playbar));
