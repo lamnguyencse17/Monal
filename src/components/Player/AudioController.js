@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
+import PropTypes from "prop-types";
 import AudioInterface from "./Audio/AudioInterface";
-import SkipNextIcon from "@material-ui/icons/SkipNext";
-import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import ProgressBar from "./ProgressBar";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { togglePlay, nextAudio, prevAudio } from "../actions/music";
+import SkipNext from "./AudioControls/SkipNext";
+import SkipPrev from "./AudioControls/SkipPrev";
+import PlayPauseButton from "./AudioControls/PlayPauseButton";
 
 class AudioController extends Component {
   constructor(props) {
@@ -25,7 +25,6 @@ class AudioController extends Component {
     this.setState({ progress });
   };
   handlePlay = () => {
-    console.log(this.state.audioObject.getAudioName());
     this.props.togglePlay(this.state.audioObject);
     setInterval(() => {
       let progress = this.state.audioObject.getProgress() * 100;
@@ -44,7 +43,6 @@ class AudioController extends Component {
     });
   };
   prevAudioObject = () => {
-    console.log(this.props.history[0]);
     let newAudio = new AudioInterface(
       this.props.history.length == 1
         ? this.props.history[0]
@@ -58,50 +56,34 @@ class AudioController extends Component {
     });
   };
   render() {
-    const { audioObject } = this.state;
+    const { audioObject, progress } = this.state;
+    const { play } = this.props;
     return (
       <>
         <div className="control-row">
-          <SkipPreviousIcon
-            style={{
-              color: "#ea98a4",
-              fontSize: "3rem",
-            }}
-            onClick={this.prevAudioObject}
-          />
-          {this.props.play ? (
-            <PauseCircleOutlineIcon
-              onClick={this.handlePlay}
-              style={{ color: "#ea98a4", fontSize: "3rem" }}
-            />
-          ) : (
-            <PlayCircleOutlineIcon
-              onClick={this.handlePlay}
-              style={{
-                color: "#ea98a4",
-                fontSize: "3rem",
-              }}
-            />
-          )}
-          <SkipNextIcon
-            style={{
-              color: "#ea98a4",
-              fontSize: "3rem",
-            }}
-            onClick={this.nextAudioObject}
-          />
+          <SkipPrev prevAudioObject={this.prevAudioObject} />
+          <PlayPauseButton play={play} handlePlay={this.handlePlay} />
+          <SkipNext nextAudioObject={this.nextAudioObject} />
         </div>
-        <div className="progress-row">
-          <ProgressBar
-            progress={this.state.progress}
-            audioObject={audioObject} // passed from parent
-            setProgress={this.setProgress}
-          />
-        </div>
+        <ProgressBar
+          progress={progress}
+          audioObject={audioObject}
+          setProgress={this.setProgress}
+        />
       </>
     );
   }
 }
+
+AudioController.propTypes = {
+  togglePlay: PropTypes.func.isRequired,
+  nextAudio: PropTypes.func.isRequired,
+  prevAudio: PropTypes.func.isRequired,
+  play: PropTypes.bool.isRequired,
+  audio: PropTypes.string,
+  queue: PropTypes.array.isRequired,
+  history: PropTypes.array.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

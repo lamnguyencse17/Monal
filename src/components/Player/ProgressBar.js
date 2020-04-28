@@ -1,28 +1,35 @@
-import React, { Component } from "react";
-
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
+import AudioInterface from "./Audio/AudioInterface";
 
-export default class ProgressBar extends Component {
+export default class ProgressBar extends PureComponent {
   render() {
     const { progress, audioObject } = this.props;
     return (
       <>
-        <PrettoSlider
-          valueLabelDisplay="off"
-          aria-label="pretto slider"
-          value={progress}
-          onChange={(event, value) => {
-            audioObject.setCurrentTime(value);
-          }}
-          step={0.1}
-        />
+        <div className="progress-row">
+          <CustomSlider
+            valueLabelDisplay="off"
+            value={progress}
+            onChange={(event, value) => {
+              audioObject.setCurrentTime(value);
+            }}
+            step={0.1}
+          />
+        </div>
       </>
     );
   }
 }
 
-const PrettoSlider = withStyles({
+ProgressBar.propTypes = {
+  progress: PropTypes.number.isRequired,
+  audioObject: PropTypes.instanceOf(AudioInterface),
+};
+
+const CustomSlider = withStyles({
   root: {
     color: "#ea98a4",
     height: 8,

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import Audiosrc from "./Audiosrc";
 import AudioController from "./AudioController";
-import AudioInterface from "./Audio/AudioInterface";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { togglePlay, setCurrentAudio, pushToQueue } from "../actions/music";
+import { setCurrentAudio, pushToQueue } from "../actions/music";
+import PropTypes from "prop-types";
 
 class Playbar extends Component {
   constructor(props) {
@@ -26,6 +25,10 @@ class Playbar extends Component {
   }
 }
 
+Playbar.propTypes = {
+  setCurrentAudio: PropTypes.func.isRequired,
+  pushToQueue: PropTypes.func.isRequired,
+};
 // function mapStateToProps(state) {
 //   return {
 //     audio: state.music.audio,
@@ -33,10 +36,7 @@ class Playbar extends Component {
 // }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    { togglePlay, setCurrentAudio, pushToQueue },
-    dispatch
-  );
+  return bindActionCreators({ setCurrentAudio, pushToQueue }, dispatch);
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(Playbar));
