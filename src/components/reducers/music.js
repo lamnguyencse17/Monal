@@ -3,6 +3,7 @@ import {
   TOGGLE_PLAY,
   SET_CURRENT_AUDIO,
   NEXT_AUDIO,
+  PREV_AUDIO,
 } from "../actions/types";
 import { ListItemSecondaryAction } from "@material-ui/core";
 
@@ -38,15 +39,27 @@ export default function (state = initialState, action) {
         audio: action.payload,
       };
     }
-    case NEXT_AUDIO:
+    case NEXT_AUDIO: {
       let newQueue = [...state.queue];
-      let newHistory = [...state.history, state.queue[0]];
+      let newHistory = [...state.history, state.audio];
 
       return {
         ...state,
         audio: newQueue.shift(),
         queue: newQueue,
-        histore: newHistory,
+        history: newHistory,
       };
+    }
+    case PREV_AUDIO: {
+      let newQueue = [...state.queue];
+      newQueue.push(state.audio);
+      let newHistory = [...state.history];
+      return {
+        ...state,
+        audio: newHistory.pop(),
+        queue: newQueue,
+        history: newHistory.length == 1 ? [] : newHistory,
+      };
+    }
   }
 }

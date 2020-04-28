@@ -3,6 +3,7 @@ import {
   TOGGLE_PLAY,
   SET_CURRENT_AUDIO,
   NEXT_AUDIO,
+  PREV_AUDIO,
 } from "./types";
 
 export const pushToQueue = (audio) => (dispatch) => {
@@ -19,7 +20,16 @@ export const setCurrentAudio = (audio) => (dispatch) => {
 };
 
 export const nextAudio = (oldAudio, newAudio) => (dispatch) => {
-  oldAudio.togglePlay();
-  newAudio.togglePlay();
+  if (oldAudio.isPlaying()) {
+    oldAudio.togglePlay();
+    newAudio.togglePlay();
+  }
   dispatch({ type: NEXT_AUDIO });
+};
+export const prevAudio = (oldAudio, newAudio) => (dispatch) => {
+  if (oldAudio.isPlaying()) {
+    oldAudio.togglePlay();
+    newAudio.togglePlay();
+  }
+  dispatch({ type: PREV_AUDIO });
 };

@@ -8,7 +8,7 @@ import ProgressBar from "./ProgressBar";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { togglePlay, nextAudio } from "../actions/music";
+import { togglePlay, nextAudio, prevAudio } from "../actions/music";
 
 class AudioController extends Component {
   constructor(props) {
@@ -25,18 +25,33 @@ class AudioController extends Component {
     this.setState({ progress });
   };
   handlePlay = () => {
+    console.log(this.state.audioObject.getAudioName());
     this.props.togglePlay(this.state.audioObject);
     setInterval(() => {
       let progress = this.state.audioObject.getProgress() * 100;
       this.setProgress(progress);
     }, 1000);
   };
-  changeAudioObject = () => {
+  nextAudioObject = () => {
     let newAudio = new AudioInterface(
       this.props.queue[0],
       this.props.togglePlay
     );
     this.props.nextAudio(this.state.audioObject, newAudio);
+    this.setState({
+      ...this.state,
+      audioObject: newAudio,
+    });
+  };
+  prevAudioObject = () => {
+    console.log(this.props.history[0]);
+    let newAudio = new AudioInterface(
+      this.props.history.length == 1
+        ? this.props.history[0]
+        : this.props.history[-1],
+      this.props.togglePlay
+    );
+    this.props.prevAudio(this.state.audioObject, newAudio);
     this.setState({
       ...this.state,
       audioObject: newAudio,
@@ -52,6 +67,7 @@ class AudioController extends Component {
               color: "#ea98a4",
               fontSize: "3rem",
             }}
+            onClick={this.prevAudioObject}
           />
           {this.props.play ? (
             <PauseCircleOutlineIcon
@@ -72,7 +88,7 @@ class AudioController extends Component {
               color: "#ea98a4",
               fontSize: "3rem",
             }}
-            onClick={this.changeAudioObject}
+            onClick={this.nextAudioObject}
           />
         </div>
         <div className="progress-row">
@@ -92,11 +108,12 @@ function mapStateToProps(state) {
     audio: state.music.audio,
     play: state.music.play,
     queue: state.music.queue,
+    history: state.music.history,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ togglePlay, nextAudio }, dispatch);
+  return bindActionCreators({ togglePlay, nextAudio, prevAudio }, dispatch);
 }
 
 export default withRouter(

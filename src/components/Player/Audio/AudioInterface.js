@@ -26,4 +26,7 @@ export default class AudioInterface {
   getAudioName = () => {
     return this.audio.currentSrc;
   };
+  isPlaying = () => {
+    return !this.audio.paused;
+  };
 }
